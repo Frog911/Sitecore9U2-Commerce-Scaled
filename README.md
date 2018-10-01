@@ -71,7 +71,7 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
 
   o	Sitecore.BizFX.x.x.xxx.zip
     
-•	Download all the files from github and put it in ‘C:\Deploy’ folder
+•	Download all the zip files from github and unzip it in ‘C:\Deploy’ folder
     
 # Step 1: Generate domain certificate
 
@@ -83,7 +83,7 @@ This script will generate the required ‘.cer’ and ‘.pfx’ with password a
 
 o	Copy the Deploy folder created in ‘Step 0’ to C drive of Identity Server
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Identity Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -100,7 +100,7 @@ o	Open ID Server port (like 5050) in the Firewall
 
 o	Copy the Deploy folder created in ‘Step 0’ to C drive of BizFx Server
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after #Deploy BizFx Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -116,7 +116,7 @@ o	Open BixFx Server port (like 4200) in the Firewall
 
 o	Copy the Deploy folder created in ‘Step 0’ to C drive of Ops Server
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Ops Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -144,7 +144,7 @@ Also, you will get error while adding ‘CSFndRuntimeUser’ to SitecoreCommerce
 
 # Step 5: Setup ‘Authoring’ Role
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Authoring Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -158,7 +158,7 @@ o	Open Authoring Server port (like 5000) in the Firewall
 
 # Step 6: Setup ‘Shops’ Role
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Shops Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -176,7 +176,7 @@ Note:
 
 # Step 7: Setup ‘Minions’ Role
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Minions Role’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -190,7 +190,7 @@ o	Open Minions Server port (like 5010) in the Firewall
 
 # Step 8: Deploy Solr Cores for Commerce
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy Solr Cores’ comment and save the file. (make sure all other entries are commented except this one)
 
@@ -200,7 +200,7 @@ o	Three additional Solr Cores CatalogItemsScope, CustomersScope and OrdersScope 
 
 # Step 9: Deploy Commerce packages on Content Management Server
 
-o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
+o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
 o	Uncomment line just after ‘#Deploy CMS Packages’ comment and save the file. (make sure all other entries are commented except this one)
 
