@@ -72,6 +72,83 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
   o	Sitecore.BizFX.x.x.xxx.zip
     
 •	Download all the zip files from github and unzip it in ‘C:\Deploy’ folder
+
+•	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell or your choice of editor and update following parameters as per your implementation:
+
+   o	[string]$SiteName = [Sitecore website name],
+   
+   o	[string]$SiteHostHeaderName = [Storefront name],	
+   
+   o	[string]$SqlDbPrefix = [Prefix used for databade tables like xp05],
+   
+   o	[string]$CommerceSearchProvider = [Search server used like SOLR]
+   
+   o	XConnectInstallDir = [Webroot path of xConnect]
+   
+   o	CommerceServicesDbServer = DB Server IP Address or name    
+   
+   o	CommerceServicesDbName = [Shared env. DB name.]
+   
+   o	CommerceServicesGlobalDbName = [Global DB name]		
+   
+   o	SitecoreDbServer = [DB Server IP Address or name]    
+   
+   o	SitecoreCoreDbName = [Sitecore Core DB name]
+   
+   o	SitecoreUsername = [Sitecore login username]
+   
+   o	SitecoreUserPassword = [Sitecore login Password]
+   
+   o	SolrUrl = [URL of solr server like https://ipAddress or server name/solr]
+   
+   o	SolrRoot = [Root location of Solr like C:\\solr-6.6.2]
+   
+   o	SolrService = [Solr Service Name]
+   
+   o	CommerceOpsServicesPort = [Port where DevOps need to setup like "5015"]
+   
+   o	CommerceShopsServicesPort = [Port where Shops need to setup like "5005"]
+   
+   o	CommerceAuthoringServicesPort = [Port where Auth need to setup like "5000"]
+   
+   o	CommerceMinionsServicesPort = = [Port where Minions need to setup like "5010"]
+   
+   o	CommerceOpsHostEntry = [Host Entry for Ops website like ops.dev.local]
+   
+   o	CommerceShopsHostEntry = [Host Entry for Shops website like shops.dev.local"]
+   
+   o	CommerceAuthoringHostEntry = [Host Entry for Auth website like "auth.dev.local"]
+   
+   o	CommerceMinionsHostEntry = [Host Entry for Minions website like minion.dev.local"]
+   
+   o	CommerceMinionsSiteName = [Minions website name in IIS like CommerceMinions_Sc9"]
+   
+   o	CommerceAuthoringSiteName = [Auth website name in IIS like  CommerceAuthoring_Sc9]
+   
+   o	CommerceOpsSiteName = [Ops website name in IIS like  "CommerceOps_Sc9"]
+   
+   o	CommerceShopsSiteName = [Shops website name in IIS like  "CommerceShops_Sc9"]
+   
+   o	DomainCertificateName = [Name of the domain certificate like "*.dev.local"]
+   
+   o	CommerceEngineCertificatePath = [Path where certificate is placed "C:\certs\devlocalclient.cer"]
+   
+   o	IdentitySiteName = [Identity website name in IIS like "SitecoreIdentityServer"]
+   
+   o	IdentityHostName = [Host Entry for Identity website like identity.dev.local"]
+   
+   o	IdentityPortId = [Port where Identity website need to setup like "5050"]
+   
+   o	BizFxSiteName = [BizFx website name in IIS like "SitecoreBizFx"]
+   
+   o	BizFxHostName = [Host Entry for BizFx website like "bizfx.dev.local"]
+   
+   o	BizFxPortId = [Port where BizFx website need to setup like "4200"]
+   
+   o	SQLServerUserName = [SQL Server username]
+   
+   o	SQLServerPassword = [SQL Server password]	
+
     
 # Step 1: Generate domain certificate
 
