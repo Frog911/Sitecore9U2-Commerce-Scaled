@@ -30,17 +30,18 @@
     "SitecoreCommerceEngineZipPath": { "Type": "string", "Description": "Sitecore Commerce Engine zip Path" },
     "UserAccount": { "Type": "psobject", "DefaultValue": {"UserName": "", "Domain": "$env:COMPUTERNAME", "Password": ""} },
 	"LocalUserAccount": { "Type": "psobject", "DefaultValue": {"UserName": "", "Domain": "$env:COMPUTERNAME", "Password": ""} },
-	  "BraintreeAccount": { "Type": "psobject", "DefaultValue": {"MerchantId": "", "PublicKey": "", "PrivateKey": ""}, "Description": "Braintree account for Payment plugin." }
+	  "BraintreeAccount": { "Type": "psobject", "DefaultValue": {"MerchantId": "", "PublicKey": "", "PrivateKey": ""}, "Description": "Braintree account for Payment plugin." },
+    "CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" }
   },
   "Variables": {
     "CommerceOps": "[concat('CommerceOps_', parameter('CommerceServicesPostfix'))]",
     "CommerceShops": "[concat('CommerceShops_', parameter('CommerceServicesPostfix'))]",
     "CommerceAuthoring": "[concat('CommerceAuthoring_', parameter('CommerceServicesPostfix'))]",
     "CommerceMinions": "[concat('CommerceMinions_', parameter('CommerceServicesPostfix'))]",
-    "CommerceOpsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceOps')))]",
-    "CommerceShopsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceShops')))]",
-    "CommerceAuthoringPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceAuthoring')))]",
-    "CommerceMinionsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceMinions')))]",
+    "CommerceOpsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceOps'))]",
+    "CommerceShopsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceShops'))]",
+    "CommerceAuthoringPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceAuthoring'))]",
+    "CommerceMinionsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceMinions'))]",
     // The name dns name of the root certificate.
     "Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
     // The certificate store for the root certificate.
