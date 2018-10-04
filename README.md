@@ -1,5 +1,5 @@
 # Objective:
-Deploy Sitecore 9 Commerce Update 2 irrespective of topologies as long as you have required access required on the servers.
+Deploy Sitecore 9 Commerce Update 2 in scaled enviornment irrespective of XP topology as long as you have required access to the servers. This script will allow to deploy each of the commerce services independently of each other and on seperate servers. 
 
 # Prerequisite:
 Sitecore 9 is up and running with SQL Server and Solr
@@ -29,10 +29,6 @@ ASP.NET Core 2.0 .NET Core: https://www.microsoft.com/net/download/dotnet-core/r
 SitecoreFundamentals: https://sitecore.myget.org/feed/sc-powershell/package/nuget/SitecoreFundamentals
 
 SitecoreInstallFramework: https://sitecore.myget.org/feed/sc-powershell/package/nuget/SitecoreInstallFramework
-
-# Assumptions:
-
-XConnect is up and running on CM server. **
 
 IIS and .NET Core is installed on all the servers where we are hosting following roles:
 
