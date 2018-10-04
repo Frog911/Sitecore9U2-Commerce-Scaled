@@ -610,7 +610,7 @@
         "ConfigFileList": [ "Sitecore.Marketing.Search.config" ]
       }
     },
-    "InstallPowershellExtensions": {
+    "InstallPowershellExtensions": {  
       "Type": "InstallSitecoreConfiguration",
       "Params": {
         "Path": "[concat(parameter('SifPath'), '\\Configuration\\SitecoreUtilities\\InstallModule.json')]",
