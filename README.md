@@ -1,5 +1,5 @@
 # Objective:
-Deploy Sitecore 9 Update 2 on scaled environment by extending the available scripts.
+Deploy Sitecore 9 Commerce Update 2 irrespective of topologies as long as you have required access required on the servers.
 
 # Prerequisite:
 Sitecore 9 is up and running with SQL Server and Solr
@@ -298,3 +298,6 @@ o	Uncomment line just after ‘#Deploy CD Packages’ comment and save the file.
 o	Once installed, Switch back the Role from CM to CD.
 
 o	Open App_Config -> Sitecore -> Marketing.Operations.xMgmt -> Sitecore.Marketing.Solr.Index.Web.config and update Sitecore_marketingdefinitions_web with [Your Instance Name]_marketingdefinitions_web
+
+
+**Note: This script is currently tested on enviornment having CM and xConnect on same server. Testing in progress with xConnect on seperate server. Updates will be released soon.
