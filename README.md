@@ -297,3 +297,9 @@ o	Open App_Config -> Sitecore -> Marketing.Operations.xMgmt -> Sitecore.Marketin
 
 
 **Note: This script is currently tested on enviornment having CM and xConnect on same server. Testing in progress with xConnect on seperate server. Updates will be released soon.
+
+For any information reach out to:
+- Amit Mahajan : amit.mahajan@msn.com 
+  (slack: @nicks)
+- Saurabh Sachdeva: ssachdeva10@gmail.com
+ 
