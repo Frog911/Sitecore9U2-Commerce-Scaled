@@ -149,8 +149,6 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
 # Step 1: Generate domain certificate
 
 o	If you have a SSL certificate then configure it on all the servers or create a self-signed domain certificate like ‘*.dev.local’ and install it on CMS, CD, BizFx, Identity, Authoring, Minion, Ops and Shops role.
-You can refer the scripts inside ‘c:\deploy\Generate-Script’ folder.
-This script will generate the required ‘.cer’ and ‘.pfx’ with password as ‘secret’ at ‘C:\certs’ folder. Place the folder and install it on all the servers using ‘.pfx’ file. 
 
 # Step 2: Setup ‘Identity’ Role
 
