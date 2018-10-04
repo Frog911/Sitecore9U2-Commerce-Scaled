@@ -1,5 +1,5 @@
 # Objective:
-Deploy Sitecore 9 Commerce Update 2 in scaled enviornment(IaaS or on prem.) irrespective of XP topology as long as you have required access to the servers. This script will allow to deploy each of the commerce services independently of each other and on seperate servers. 
+Deploy Sitecore 9 Commerce Update 2 in scaled enviornment (IaaS or on prem) irrespective of XP topology as long as you have required access to the servers. This script will allow to deploy each of the commerce services independently of each other and on seperate servers. 
 
 # Prerequisite:
 Sitecore 9 is up and running with SQL Server and Solr
