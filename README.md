@@ -67,7 +67,7 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
 
   o	Sitecore.BizFX.x.x.xxx.zip
     
-•	Download all the zip files from github and unzip it in ‘C:\Deploy’ folder
+•	Download assets zip and SIF.Sitecore.Commerce.1.2.14 files from github, place and unzip it in ‘C:\Deploy’ folder
 
 •	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell or your choice of editor and update following parameters as per your implementation:
 
