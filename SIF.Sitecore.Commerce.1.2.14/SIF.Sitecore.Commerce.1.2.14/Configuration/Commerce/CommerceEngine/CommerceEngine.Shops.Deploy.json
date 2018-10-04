@@ -1,0 +1,179 @@
+﻿// -------------------------------------------------------------------------- //
+//         Sitecore Install Framework - Deploy Commerce Services              //
+//                                                                            //
+//  Run this configuration to deploy Commerce Engine Services.                //
+//                                                                            //
+//  NOTE: Only single line comments are accepted in configurations.           //
+// -------------------------------------------------------------------------- //
+{
+  "Parameters": {
+    "CertificateName": { "Type": "string", "Description": "The name of the certificate to be used." },
+    "RootCertFileName": { "Type": "string", "Description": "The file name of the root certificate to be created.", "DefaultValue": "SitecoreRootCert" },
+    "CommerceServicesDbServer": { "Type": "string", "Description": "Commerce Engine database server name" },		
+    "CommerceServicesDbName": { "Type": "string", "Description": "Commerce Services database name" },
+    "CommerceServicesGlobalDbName": { "Type": "string", "Description": "Commerce Services Global database name" },
+    "CommerceServicesPostfix": { "Type": "string", "DefaultValue": "Sc9" },
+    "SitecoreDbServer": { "Type": "string", "Description": "Sitecore database server name" },
+    "SitecoreCoreDbName": { "Type": "string", "Description": "Sitecore Core database name" },
+    "CommerceSearchProvider": { "Type": "string", "Description": "The search provider used for the Commerce Engine - Accepted values are 'SOLR' and 'AZURE'" },
+    "SolrUrl": { "Type": "string", "DefaultValue": "https://localhost:8983/solr", "Description": "The Solr instance url." },
+    "SearchIndexPrefix": { "Type": "string", "DefaultValue": "", "Description": "The search index prefix." },
+    "AzureSearchServiceName": { "Type": "string", "DefaultValue": "", "Description": "The Azure search service name." },
+    "AzureSearchAdminKey": { "Type": "string", "DefaultValue": "", "Description": "The Azure search service admin key." },
+    "AzureSearchQueryKey": { "Type": "string", "DefaultValue": "", "Description": "The Azure search service query key." },
+    "CommerceEngineDacPac": { "Type": "string", "Description": "Commerce Engine DacPac" },
+    "SiteHostHeaderName": { "Type": "string", "Description": "The host header name of the site to be deployed." },
+    "CommerceOpsServicesPort": { "Type": "string", "Description": "CommerceOps Services Port" },
+    "CommerceShopsServicesPort": { "Type": "string", "Description": "CommerceShops Services Port" },
+    "CommerceAuthoringServicesPort": { "Type": "string", "Description": "CommerceAuthoring Services Port" },
+    "CommerceMinionsServicesPort": { "Type": "string", "Description": "CommerceMinions Services Port" },
+    "SitecoreCommerceEngineZipPath": { "Type": "string", "Description": "Sitecore Commerce Engine zip Path" },
+    "UserAccount": { "Type": "psobject", "DefaultValue": {"UserName": "", "Domain": "$env:COMPUTERNAME", "Password": ""} },
+	"LocalUserAccount": { "Type": "psobject", "DefaultValue": {"UserName": "", "Domain": "$env:COMPUTERNAME", "Password": ""} },
+	  "BraintreeAccount": { "Type": "psobject", "DefaultValue": {"MerchantId": "", "PublicKey": "", "PrivateKey": ""}, "Description": "Braintree account for Payment plugin." },
+	  "IdentityServerURI": { "Type": "string", "DefaultValue": "https://localhost:5050", "Description": "Identity Server instance url." },
+	"BizFXURI": { "Type": "string", "DefaultValue": "https://localhost:4200", "Description": "BizFx Server instance url." },
+	"AuthoringURI": { "Type": "string", "DefaultValue": "https://localhost:5000", "Description": "Authoring Server instance url." },
+	"SQLServerUserName": { "Type": "string", "DefaultValue": "sa", "Description": "SQL Server username." },
+	"SQLServerPassword": { "Type": "string", "DefaultValue": "Password", "Description": "SQL Server Password." },
+	"Thumbprint": { "Type": "string", "DefaultValue": "", "Description": "Domain Cert Thumbprint." }
+  },
+  "Variables": {
+    "CommerceOps": "[concat('CommerceOps_', parameter('CommerceServicesPostfix'))]",
+    "CommerceShops": "[concat('CommerceShops_', parameter('CommerceServicesPostfix'))]",
+    "CommerceAuthoring": "[concat('CommerceAuthoring_', parameter('CommerceServicesPostfix'))]",
+    "CommerceMinions": "[concat('CommerceMinions_', parameter('CommerceServicesPostfix'))]",
+    "CommerceOpsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceOps')))]",
+    "CommerceShopsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceShops')))]",
+    "CommerceAuthoringPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceAuthoring')))]",
+    "CommerceMinionsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceMinions')))]",
+    // The name dns name of the root certificate.
+    "Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
+    // The certificate store for the root certificate.
+    "Root.Cert.Store": "cert:\\LocalMachine\\Root"
+  },
+  "Modules": [
+    "ManageCommerceService",
+    "DeployCommerceDatabase",
+    "DeployCommerceContent",
+    "WindowsLocalUser",
+	"SitecoreCustomUtilityTasks"
+  ],
+  "Tasks": {    
+    "StopSiteShops": {
+      "Type": "ManageWebsite",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Stop",
+        "ErrorAction": "SilentlyContinue"
+      }
+    },
+    "RemoveSiteShops": {
+      "Type": "ManageCommerceService",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Remove-Website"
+      }
+    },
+    "StopAppPoolShops": {
+      "Type": "ManageAppPool",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Stop",
+        "ErrorAction": "SilentlyContinue"
+      }
+    },
+    "RemoveAppPool": {
+      "Type": "ManageCommerceService",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Remove-WebAppPool"
+      }
+    },
+    "RemoveSiteFolderShops": {
+      "Type": "ManageCommerceService",
+      "Params": {
+        "Name": "Name",
+        "PhysicalPath": "[variable('CommerceShopsPhysicalPath')]",
+        "Action": "Remove-Item"
+      }
+    },    
+    "EnsureLocalUser": {
+      "Type": "EnsureLocalUser",
+      "Params": {
+        "UserAccount": "[parameter('UserAccount')]"
+      }
+    },
+    //"DeployCommerceDatabase": {
+    //  "Type": "DeployCommerceDatabase",
+    //  "Params": {
+    //    "CommerceServicesDbServer": "[parameter('CommerceServicesDbServer')]",
+    //    "CommerceServicesDbName": "[parameter('CommerceServicesDbName')]",
+    //    "CommerceServicesGlobalDbName": "[parameter('CommerceServicesGlobalDbName')]",
+    //    "CommerceEngineDacPac": "[parameter('CommerceEngineDacPac')]",
+    //    "UserAccount": "[parameter('UserAccount')]"
+    //  }
+    //},
+    "AddCommerceUserToCoreDatabase": {
+      "Type": "AddCommerceUserToCoreDatabase",
+      "Params": {
+        "SitecoreDbServer": "[parameter('SitecoreDbServer')]",
+        "SitecoreCoreDbName": "[parameter('SitecoreCoreDbName')]",
+        "UserAccount": "[parameter('UserAccount')]"
+      }
+    },        
+    "DeployCommerceContentShops": {
+      "Type": "DeployCommerceContent",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "ServicesContentPath": "[parameter('SitecoreCommerceEngineZipPath')]",
+        "PhysicalPath": "[variable('CommerceShopsPhysicalPath')]",
+        "UserAccount": "[parameter('UserAccount')]",
+        "CommerceSearchProvider": "[parameter('CommerceSearchProvider')]"
+      }
+    },
+    "CreatePathsShops": {
+      "Type": "EnsurePath",
+      "Params": {
+        "Exists": [
+          "[variable('CommerceShopsPhysicalPath')]"
+        ]
+      }
+    },
+    "CreateWebAppPoolShops": {
+      "Type": "ManageCommerceService",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Create-WebAppPool",
+        "UserAccount": "[parameter('UserAccount')]"
+      }
+    },
+    "CreateWebsiteShops": {
+      "Type": "ManageCommerceService",
+      "Params": {
+        "Name": "[variable('CommerceShops')]",
+        "Action": "Create-Website",
+        "AppPoolName": "[variable('CommerceShops')]",
+        "PhysicalPath": "[variable('CommerceShopsPhysicalPath')]",
+        "Port": "[parameter('CommerceShopsServicesPort')]",
+        "Signer": "[GetCertificate(variable('Root.Cert.DnsName'), variable('Root.Cert.Store'))]"
+      }
+    },     
+    "CreatePerformanceCounters": {
+      "Type": "CreatePerformanceCounters"
+    },
+	"UpdateCommerceEngineConfigs": {
+      "Type": "UpdateCommerceEngineConfigs",
+      "Params": {
+        "EngineConnectIncludeDir": "[variable('CommerceShopsPhysicalPath')]",
+        "IdentityServerURI": "[parameter('IdentityServerURI')]",
+        "BizFXURI": "[parameter('BizFXURI')]",
+        "AuthoringURI": "[parameter('AuthoringURI')]",
+		"SQLServerUserName" : "[parameter('SQLServerUserName')]",
+		"SQLServerPassword" : "[parameter('SQLServerPassword')]",
+		"CommerceServicesDbServer" : "[parameter('CommerceServicesDbServer')]",
+		"Thumbprint": "[parameter('Thumbprint')]"
+      }
+    }
+  }
+}
