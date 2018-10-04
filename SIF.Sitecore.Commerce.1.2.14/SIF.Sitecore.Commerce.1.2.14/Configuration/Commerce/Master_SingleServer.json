@@ -263,49 +263,17 @@
       "Type": "string",
       "Description": "Identity IIS Site Name"
     },
-	"CommerceMinionsHostEntry": {
-      "Type": "string",
-      "Description": "Identity Host Header Name in Drivers"
-    },
-	"CommerceMinionsServicesPort": {
-      "Type": "string",
-      "Description": "Identity Port in IIS"
-    },
 	"CommerceAuthoringSiteName": {
       "Type": "string",
       "Description": "Identity IIS Site Name"
-    },
-	"CommerceAuthoringHostEntry": {
-      "Type": "string",
-      "Description": "Identity Host Header Name in Drivers"
-    },
-	"CommerceAuthoringServicesPort": {
-      "Type": "string",
-      "Description": "Identity Port in IIS"
     },
 	"CommerceOpsSiteName": {
       "Type": "string",
       "Description": "Identity IIS Site Name"
     },
-	"CommerceOpsHostEntry": {
-      "Type": "string",
-      "Description": "Identity Host Header Name in Drivers"
-    },
-	"CommerceOpsServicesPort": {
-      "Type": "string",
-      "Description": "Identity Port in IIS"
-    },
 	"CommerceShopsSiteName": {
       "Type": "string",
       "Description": "Identity IIS Site Name"
-    },
-	"CommerceShopsHostEntry": {
-      "Type": "string",
-      "Description": "Identity Host Header Name in Drivers"
-    },
-	"CommerceShopsServicesPort": {
-      "Type": "string",
-      "Description": "Identity Port in IIS"
     },
 	"IdentityPortId": {
       "Type": "string",
@@ -525,8 +493,6 @@
         "AuthoringURI": "[concat('https://', concat(parameter('CommerceAuthoringHostEntry'),concat(':', concat(parameter('CommerceAuthoringServicesPort')))))]",
 		    "SQLServerUserName": "[parameter('SQLServerUserName')]",
 	    	"SQLServerPassword": "[parameter('SQLServerPassword')]",
-		    "SQLServerUserName": "[parameter('SQLServerUserName')]",
-        "SQLServerPassword": "[parameter('SQLServerPassword')]",
 		    "Thumbprint": "[variable('DomainCertificateName.CertificateThumbprint')]",
         "CommerceInstallDir": "[parameter('CommerceInstallDir')]"	
       }
