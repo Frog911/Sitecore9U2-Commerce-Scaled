@@ -16,9 +16,14 @@ if ($env:PSModulePath -notlike "*$modulesPath*")
     [Environment]::SetEnvironmentVariable("PSModulePath",$p)
 }
 
+#new variables defined in master_singleServer.json
+$SifPath = "" #path till \Configuration folder (e.g E:\SIF.Sitecore.Commerce.1.2.14)
+$CommerceInstallDir = "D:\project" #path to install commerce sites
+
 
 $params = @{
         Path = Resolve-Path '.\Configuration\Commerce\Master_SingleServer.json'	
+
 		SiteName = $SiteName
 		SiteHostHeaderName = $SiteHostHeaderName 
 		InstallDir = "$($Env:SYSTEMDRIVE)\inetpub\wwwroot\$SiteName"
@@ -29,7 +34,11 @@ $params = @{
 		AzureSearchServiceName = ""
 		AzureSearchAdminKey = ""
 		AzureSearchQueryKey = ""
-		CommerceEngineDacPac = Resolve-Path -Path "..\Sitecore.Commerce.Engine.SDK.*\Sitecore.Commerce.Engine.DB.dacpac"	 		
+		CommerceEngineDacPac = Resolve-Path -Path "..\Sitecore.Commerce.Engine.SDK.*\Sitecore.Commerce.Engine.DB.dacpac"	 
+        
+        #new params
+        SifPath = $SifPath
+        CommerceInstallDir = $CommerceInstallDir	
 
         #UPDATE AS PER YOUR ENV. BEGIN
         CommerceServicesDbServer = "your db server ip"    #OR "SQLServerName\SQLInstanceName"
