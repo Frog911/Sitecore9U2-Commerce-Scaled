@@ -30,7 +30,7 @@
       "Type": "string",
       "Description": "Commerce Shops URI"
     },
-    "CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" },
+    "CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" }
   },
   "Variables": {
     "CommerceOps": "[concat('CommerceOps_', parameter('CommerceServicesPostfix'))]",
