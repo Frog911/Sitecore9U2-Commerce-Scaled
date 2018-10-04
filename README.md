@@ -220,5 +220,4 @@ o	Uncomment line just after ‘#Deploy CD Packages’ comment and save the file.
 
 o	Once installed, Switch back the Role from CM to CD.
 
-o	Open App_Config -> Sitecore -> Marketing.Operations.xMgmt -> Sitecore.Marketing.Solr.Index.Web.config and change the following config entry
-<param desc="core">[Your Instance Name]_marketingdefinitions_web</param>
+o	Open App_Config -> Sitecore -> Marketing.Operations.xMgmt -> Sitecore.Marketing.Solr.Index.Web.config and update Sitecore_marketingdefinitions_web with [Your Instance Name]_marketingdefinitions_web
