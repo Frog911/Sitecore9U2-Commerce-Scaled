@@ -35,10 +35,11 @@
     "SitecoreIdentityServerName": {
       "Type": "string",
       "Description": "Sitecore Identity Server name"
-    }
+    },
+		"CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" }
   },
   "Variables": {
-    "SitecoreIdentityServerPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', parameter('SitecoreIdentityServerName')))]",
+    "SitecoreIdentityServerPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\' ,parameter('SitecoreIdentityServerName'))]",
     // The name dns name of the root certificate.
     "Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
     // The certificate store for the root certificate.

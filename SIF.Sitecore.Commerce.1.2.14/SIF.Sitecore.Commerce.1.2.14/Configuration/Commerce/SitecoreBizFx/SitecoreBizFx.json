@@ -27,10 +27,11 @@
 		"CommerceAuthoringServicesPort": {
 			"Type": "string",
 			"Description": "Commerce Authoring Services port"
-		}
+		},
+		"CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" }
 	},
 	"Variables": {
-		"SitecoreBizFxPhysicalPath": "[concat(environment('SystemDrive'), '\\inetpub\\wwwroot\\SitecoreBizFx')]",
+		"SitecoreBizFxPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\SitecoreBizFx')]",
 		// The name dns name of the root certificate.
 		"Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
 		// The certificate store for the root certificate.
