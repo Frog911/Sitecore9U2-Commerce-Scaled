@@ -36,17 +36,18 @@
 	"AuthoringURI": { "Type": "string", "DefaultValue": "https://localhost:5000", "Description": "Authoring Server instance url." },
 	"SQLServerUserName": { "Type": "string", "DefaultValue": "sa", "Description": "SQL Server username." },
 	"SQLServerPassword": { "Type": "string", "DefaultValue": "Password", "Description": "SQL Server Password." },
-	"Thumbprint": { "Type": "string", "DefaultValue": "", "Description": "Domain Cert Thumbprint." }
+	"Thumbprint": { "Type": "string", "DefaultValue": "", "Description": "Domain Cert Thumbprint." },
+  "CommerceInstallDir": { "Type": "string", "DefaultValue": "", "Description": "Path to Install Commerce!" }
   },
   "Variables": {
     "CommerceOps": "[concat('CommerceOps_', parameter('CommerceServicesPostfix'))]",
     "CommerceShops": "[concat('CommerceShops_', parameter('CommerceServicesPostfix'))]",
     "CommerceAuthoring": "[concat('CommerceAuthoring_', parameter('CommerceServicesPostfix'))]",
     "CommerceMinions": "[concat('CommerceMinions_', parameter('CommerceServicesPostfix'))]",
-    "CommerceOpsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceOps')))]",
-    "CommerceShopsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceShops')))]",
-    "CommerceAuthoringPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceAuthoring')))]",
-    "CommerceMinionsPhysicalPath": "[concat(environment('SystemDrive'), concat('\\inetpub\\wwwroot\\', variable('CommerceMinions')))]",
+    "CommerceOpsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceOps'))]",
+    "CommerceShopsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceShops'))]",
+    "CommerceAuthoringPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceAuthoring'))]",
+    "CommerceMinionsPhysicalPath": "[concat(parameter('CommerceInstallDir'), '\\', variable('CommerceMinions'))]",
     // The name dns name of the root certificate.
     "Root.Cert.DnsName": "[concat('DO_NOT_TRUST_', parameter('RootCertFileName'))]",
     // The certificate store for the root certificate.
