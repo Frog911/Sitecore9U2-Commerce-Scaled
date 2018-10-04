@@ -299,5 +299,5 @@ o	Open App_Config -> Sitecore -> Marketing.Operations.xMgmt -> Sitecore.Marketin
 For any information reach out to:
 - Amit Mahajan : amit.mahajan@msn.com 
   (slack: @nicks)
-- Saurabh Sachdeva: ssachdeva10@gmail.com
+- Saurabh Sachdeva: saurabhsachdeva10@gmail.com
  
