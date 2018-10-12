@@ -47,7 +47,7 @@ IIS and .NET Core is installed on all the servers where we are hosting following
 **Working on updating and testing the scripts where XConnect is deployed on separate server.
 
 # Overview:
-Common PowerShell script is used to deploy all the roles and required packages. Just uncomment the required role in the PowerShell script and run it on a specific server. The PowerShell script will create the website, modify the required configuration, assign the required certificate and create the host entry.
+Common PowerShell script is used to deploy all the roles and required packages. Just provide the Role to be deployed in the PowerShell script and run it on a specific server. The PowerShell script will create the website, modify the required configuration, assign the required certificate and create the host entry.
 
 # Recommendation:
 
@@ -69,6 +69,8 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
     
 •	Download assets zip and SIF.Sitecore.Commerce.1.2.14 files from github, place and unzip it in ‘C:\Deploy’ folder
 
+•	Download Sitecore Experience Accelerator package (zip file) from https://dev.sitecore.net/Downloads/Sitecore_Experience_Accelerator.aspx and plavce the zip file in assets folder
+
 •	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell or your choice of editor and update following parameters as per your implementation:
 
    o	[string]$SiteName = [Sitecore website name],
@@ -78,6 +80,12 @@ Unzip the package. For rest of the documentation I assume you have unzipped it o
    o	[string]$SqlDbPrefix = [Prefix used for databade tables like xp05],
    
    o	[string]$CommerceSearchProvider = [Search server used like SOLR]
+      
+   o	[string]$RoleToBeDeployed = "" #Roles can be Identity or BizFx or Ops or Authoring or Minions or Shops or Solr or CM or CD
+      
+   o	$SifPath = "" #path till \Configuration folder (e.g C:\deploy\SIF.Sitecore.Commerce.1.2.14)
+   
+   o	$CommerceInstallDir = "" #path to install commerce sites (e.g C:\inetpub\wwwroot)
    
    o	XConnectInstallDir = [Webroot path of xConnect]
    
@@ -156,7 +164,7 @@ o	Copy the Deploy folder created in ‘Step 0’ to C drive of Identity Server
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Identity Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Identity" and save the file. 
 
 o	Run the powershell script.
 
@@ -173,7 +181,7 @@ o	Copy the Deploy folder created in ‘Step 0’ to C drive of BizFx Server
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after #Deploy BizFx Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "BizFx" and save the file. 
 
 o	Run the powershell script.
 
@@ -189,7 +197,7 @@ o	Copy the Deploy folder created in ‘Step 0’ to C drive of Ops Server
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Ops Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Ops" and save the file.
 
 o	Run the powershell script.
 
@@ -217,7 +225,7 @@ Also, you will get error while adding ‘CSFndRuntimeUser’ to SitecoreCommerce
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Authoring Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Authoring" and save the file.
 
 o	Run the powershell script.
 
@@ -231,7 +239,7 @@ o	Open Authoring Server port (like 5000) in the Firewall
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Shops Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Shops" and save the file.
 
 o	Run the powershell script.
 
@@ -249,7 +257,7 @@ Note:
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Minions Role’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Minions" and save the file.
 
 o	Run the powershell script.
 
@@ -263,7 +271,7 @@ o	Open Minions Server port (like 5010) in the Firewall
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy Solr Cores’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "Solr" and save the file.
 
 o	Run the powershell script.
 
@@ -273,7 +281,7 @@ o	Three additional Solr Cores CatalogItemsScope, CustomersScope and OrdersScope 
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1" in Powershell
 
-o	Uncomment line just after ‘#Deploy CMS Packages’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "CM" and save the file.
 
 o	Once installed, open CMS -> Control Panel and do ReIndexing.
 
@@ -287,7 +295,7 @@ o	Switch the Role of CD to CM and run the script.
 
 o	Open "C:\deploy\SIF.Sitecore.Commerce.1.2.14\Deploy-Sitecore-Commerce.ps1"
 
-o	Uncomment line just after ‘#Deploy CD Packages’ comment and save the file. (make sure all other entries are commented except this one)
+o	Set the value of RoleToBeDeployed = "CD" and save the file.
 
 o	Once installed, Switch back the Role from CM to CD.
 
