@@ -342,7 +342,7 @@
         "Path": "[concat(parameter('SifPath'), '\\Configuration\\Commerce\\SXAStorefront\\SXAStorefront.CreateBinding.json')]",
         "SiteName": "[parameter('SiteName')]",
         "CertificateName": "[parameter('CertificateName')]",
-        "StorefrontHostName": "[parameter('SiteHostHeaderName')]"	
+        "StorefrontHostName": "[parameter('SiteHostHeaderName')]" 	
       }
     },
     "InstallSolrCores": {

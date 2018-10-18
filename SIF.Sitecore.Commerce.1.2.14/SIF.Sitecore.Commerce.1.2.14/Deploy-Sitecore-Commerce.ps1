@@ -1,10 +1,14 @@
 #Requires -Version 3
 param(
     #UPDATE AS PER YOUR ENV. BEGIN
-    [string]$SiteName = "xp05.dev.local",	
-	[string]$SiteHostHeaderName = "sxasfU05.dev.local",	
-	[string]$SqlDbPrefix = "xp05",
-	[string]$CommerceSearchProvider = "SOLR"
+    [string]$SiteName = "xp15.dev.local",	
+	[string]$SiteHostHeaderName = "sxasfU15.dev.local",	
+	[string]$SqlDbPrefix = "xp15",
+	[string]$CommerceSearchProvider = "SOLR",
+
+    [string]$RoleToBeDeployed = "CM1"
+    #Roles can be Identity, BizFx, Ops, Authoring, Minions, Shops, Solr, CM, CD
+	
     #UPDATE AS PER YOUR ENV. END
 )
 
@@ -17,8 +21,8 @@ if ($env:PSModulePath -notlike "*$modulesPath*")
 }
 
 #new variables defined in master_singleServer.json
-$SifPath = "" #path till \Configuration folder (e.g E:\SIF.Sitecore.Commerce.1.2.14)
-$CommerceInstallDir = "D:\project" #path to install commerce sites
+$SifPath = "C:\deploy\SIF.Sitecore.Commerce.1.2.14" #path till \Configuration folder (e.g E:\SIF.Sitecore.Commerce.1.2.14)
+$CommerceInstallDir = "C:\inetpub\wwwroot" #path to install commerce sites
 
 
 $params = @{
@@ -27,7 +31,7 @@ $params = @{
 		SiteName = $SiteName
 		SiteHostHeaderName = $SiteHostHeaderName 
 		InstallDir = "$($Env:SYSTEMDRIVE)\inetpub\wwwroot\$SiteName"
-		XConnectInstallDir = "C:\inetpub\wwwroot\xp05xc.dev.local"
+		XConnectInstallDir = "C:\inetpub\wwwroot\xp15xc.dev.local"
         CertificateName = $SiteName        
         SolrSchemas = ( Join-Path -Path $DEPLOYMENT_DIRECTORY -ChildPath "SolrSchemas" )
 		SearchIndexPrefix = ""
@@ -38,7 +42,7 @@ $params = @{
         
         #new params
         SifPath = $SifPath
-        CommerceInstallDir = $CommerceInstallDir	
+        CommerceInstallDir = $CommerceInstallDir
 
         #UPDATE AS PER YOUR ENV. BEGIN
         CommerceServicesDbServer = "your db server ip"    #OR "SQLServerName\SQLInstanceName"
@@ -129,50 +133,29 @@ $params = @{
    
 
 if ($CommerceSearchProvider -eq "SOLR") {
-	 #########################################################################
-    #Deploy BizFx
-	#Install-SitecoreConfiguration @params -Tasks DeploySitecoreBizFx,CreateBindings,CreateHostHeader,UpdateBizFxConfigs -ErrorAction Continue -Verbose
-    #########################################################################
-
-    #########################################################################
-    #Deploy Identity
-    #Install-SitecoreConfiguration @params -Tasks DeploySitecoreIdentityServer,CreateIdentityBindings,CreateIdentityHostHeader,UpdateIdentityConfigs -ErrorAction Continue
-    #########################################################################
-
-    #########################################################################
-    #Deploy Ops
-    #Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineOps,CreateOpsBindings,CreateOpsHostHeader -ErrorAction Continue
-    #########################################################################
-
-    #########################################################################
-    #Deploy Shops
-    #Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineShops,CreateShopsBindings,CreateShopsHostHeader -ErrorAction Continue
-    #########################################################################
-
-    #########################################################################
-    #Deploy Authoring
-   # Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineAuthoring,CreateAuthoringBindings,CreateAuthoringHostHeader -ErrorAction Continue
-    #########################################################################
+	switch ( $RoleToBeDeployed )
+    {
         
-    #########################################################################
-    #Deploy Minions
-   #Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineMinions,CreateMinionsBindings,CreateMinionsHostHeader -ErrorAction Continue
-    #########################################################################
-    
-    #########################################################################
-    #Deploy Solr
-	#Install-SitecoreConfiguration @params -Tasks InstallSolrCores -ErrorAction Continue -Verbose
-    #########################################################################
+        'Identity' { Install-SitecoreConfiguration @params -Tasks DeploySitecoreIdentityServer,CreateIdentityBindings,CreateIdentityHostHeader,UpdateIdentityConfigs -ErrorAction Continue }
 
-    #########################################################################
-    #Deploy CMS InitializeCommerceEngine,UpdateShopsOpsURI
-    #Install-SitecoreConfiguration @params -Tasks CreateBinding,CopySiteUtilityFolder,DisableIndexUpdate,DisableConfigFiles,InstallPowershellExtensions,InstallSXAFrameworkModule,PublishExtensions,InstallHabitatImagesModule,InstallAdventureWorksImagesModule,InstallCommerceConnectModule,InstallCommercexProfilesModule,InstallCommercexAnalyticsModule,InstallCommerceMAModule,InstallCommerceEngineConnectModule,CopyConnectModels,InstallSXAStorefrontModule,ImportRootCertificate,UpdateWebsiteConfigs,InitializeCommerceEngine,UpdateShopsOpsURI,EnableCEConnectDataProvider,GenerateCatalogTemplates,CreateDefaultTenantAndSite,PublishCommerce,EnableIndexUpdate,EnableConfigFiles,EnableCEConnectIndexing,Reindex,RemoveSiteUtilityFolder -ErrorAction Continue -Verbose
-    #########################################################################
+        'BizFx' { Install-SitecoreConfiguration @params -Tasks DeploySitecoreBizFx,CreateBindings,CreateHostHeader,UpdateBizFxConfigs -ErrorAction Continue -Verbose }
+        
+        'Ops' { Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineOps,CreateOpsBindings,CreateOpsHostHeader -ErrorAction Continue }
+        
+        'Shops' { Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineShops,CreateShopsBindings,CreateShopsHostHeader -ErrorAction Continue }
 
-    #########################################################################
-    #Deploy CD 
-    #Install-SitecoreConfiguration @params -Tasks ImportRootCertificate,EnableCEConnectDataProvider,EnableIndexUpdate,EnableConfigFiles,EnableCEConnectIndexing,RemoveSiteUtilityFolder -ErrorAction Continue -Verbose
-    ########################
+        'Authoring' { Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineAuthoring,CreateAuthoringBindings,CreateAuthoringHostHeader -ErrorAction Continue }
+        
+        'Minions' { Install-SitecoreConfiguration @params -Tasks DeployCommerceEngineMinions,CreateMinionsBindings,CreateMinionsHostHeader -ErrorAction Continue }
+        
+        'Solr' { Install-SitecoreConfiguration @params -Tasks InstallSolrCores -ErrorAction Continue -Verbose }
+
+        'CM' { Install-SitecoreConfiguration @params -Tasks CreateBinding,CopySiteUtilityFolder,DisableIndexUpdate,DisableConfigFiles,InstallPowershellExtensions,InstallSXAFrameworkModule,PublishExtensions,InstallHabitatImagesModule,InstallAdventureWorksImagesModule,InstallCommerceConnectModule,InstallCommercexProfilesModule,InstallCommercexAnalyticsModule,InstallCommerceMAModule,InstallCommerceEngineConnectModule,CopyConnectModels,InstallSXAStorefrontModule,ImportRootCertificate,UpdateWebsiteConfigs,InitializeCommerceEngine,UpdateShopsOpsURI,EnableCEConnectDataProvider,GenerateCatalogTemplates,CreateDefaultTenantAndSite,PublishCommerce,EnableIndexUpdate,EnableConfigFiles,EnableCEConnectIndexing,Reindex,RemoveSiteUtilityFolder -ErrorAction Continue -Verbose }
+        
+        'CD' { Install-SitecoreConfiguration @params -Tasks ImportRootCertificate,EnableCEConnectDataProvider,EnableIndexUpdate,EnableConfigFiles,EnableCEConnectIndexing,RemoveSiteUtilityFolder -ErrorAction Continue -Verbose }
+
+        
+     }
 }
 elseif ($CommerceSearchProvider -eq "AZURE"){
 	Install-SitecoreConfiguration @params -Skip InstallSolrCores
