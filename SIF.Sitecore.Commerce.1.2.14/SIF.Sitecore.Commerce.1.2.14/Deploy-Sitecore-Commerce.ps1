@@ -6,7 +6,7 @@ param(
 	[string]$SqlDbPrefix = "xp15",
 	[string]$CommerceSearchProvider = "SOLR",
 
-    [string]$RoleToBeDeployed = "CM1"
+    [string]$RoleToBeDeployed = "CM"
     #Roles can be Identity, BizFx, Ops, Authoring, Minions, Shops, Solr, CM, CD
 	
     #UPDATE AS PER YOUR ENV. END
